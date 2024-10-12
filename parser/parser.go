@@ -150,8 +150,8 @@ func (p *Parser) parseReturnStatement() ast.Statement {
 }
 
 func (p *Parser) parseExpressionStatement() *ast.ExpressionStatement {
-	trace(fmt.Sprintf("parseExpressionStatement: curToken=%s", p.curToken.Literal))
-	defer untrace("parseExpressionStatement")
+	// trace(fmt.Sprintf("parseExpressionStatement: curToken=%s", p.curToken.Literal))
+	// defer untrace("parseExpressionStatement")
 
 	stmt := &ast.ExpressionStatement{Token: p.curToken}
 
@@ -165,8 +165,8 @@ func (p *Parser) parseExpressionStatement() *ast.ExpressionStatement {
 
 // Pratt構文解析
 func (p *Parser) parseExpression(precedence int) ast.Expression {
-	trace(fmt.Sprintf("parseExpression: curToken=%s, precedence=%d, peekToken=%s, peekPrecedence=%d", p.curToken.Literal, precedence, p.peekToken.Literal, p.peekPrecedence()))
-	defer untrace("parseExpression")
+	// trace(fmt.Sprintf("parseExpression: curToken=%s, precedence=%d, peekToken=%s, peekPrecedence=%d", p.curToken.Literal, precedence, p.peekToken.Literal, p.peekPrecedence()))
+	// defer untrace("parseExpression")
 
 	prefix := p.prefixParseFns[p.curToken.Type]
 	if prefix == nil {
@@ -190,8 +190,8 @@ func (p *Parser) parseExpression(precedence int) ast.Expression {
 }
 
 func (p *Parser) parsePrefixExpression() ast.Expression {
-	trace(fmt.Sprintf("parsePrefixExpression: curToken=%s", p.curToken.Literal))
-	defer untrace("parsePrefixExpression")
+	// trace(fmt.Sprintf("parsePrefixExpression: curToken=%s", p.curToken.Literal))
+	// defer untrace("parsePrefixExpression")
 
 	expression := &ast.PrefixExpression{
 		Token:    p.curToken,
@@ -209,8 +209,8 @@ func (p *Parser) noPrefixParseFnError(t token.TokenType) {
 }
 
 func (p *Parser) parseInfixExpression(left ast.Expression) ast.Expression {
-	trace(fmt.Sprintf("parseInfixExpression: curToken=%s, precedence=%d, left=%s", p.curToken.Literal, p.curPrecedence(), left.String()))
-	defer untrace("parsePrefixExpression")
+	// trace(fmt.Sprintf("parseInfixExpression: curToken=%s, precedence=%d, left=%s", p.curToken.Literal, p.curPrecedence(), left.String()))
+	// defer untrace("parsePrefixExpression")
 
 	expression := &ast.InfixExpression{
 		Token:    p.curToken,
@@ -224,8 +224,8 @@ func (p *Parser) parseInfixExpression(left ast.Expression) ast.Expression {
 }
 
 func (p *Parser) parseIntegerLiteral() ast.Expression {
-	trace(fmt.Sprintf("parseIntegerLiteral: curToken=%s", p.curToken.Literal))
-	defer untrace("parseIntegerLiteral")
+	// trace(fmt.Sprintf("parseIntegerLiteral: curToken=%s", p.curToken.Literal))
+	// defer untrace("parseIntegerLiteral")
 
 	lit := &ast.IntegerLiteral{Token: p.curToken}
 
@@ -240,8 +240,8 @@ func (p *Parser) parseIntegerLiteral() ast.Expression {
 }
 
 func (p *Parser) parseIdentifier() ast.Expression {
-	trace(fmt.Sprintf("parseIdentifier: curToken=%s", p.curToken.Literal))
-	defer untrace("parseIdentifier")
+	// trace(fmt.Sprintf("parseIdentifier: curToken=%s", p.curToken.Literal))
+	// defer untrace("parseIdentifier")
 
 	return &ast.Identifier{
 		Token: p.curToken,
@@ -257,8 +257,8 @@ func (p *Parser) parseBoolean() ast.Expression {
 }
 
 func (p *Parser) parseGroupedExpression() ast.Expression {
-	trace(fmt.Sprintf("parseGroupedExpression: curToken=%s", p.curToken.Literal))
-	defer untrace("parseGroupedExpression")
+	// trace(fmt.Sprintf("parseGroupedExpression: curToken=%s", p.curToken.Literal))
+	// defer untrace("parseGroupedExpression")
 
 	p.nextToken()
 
@@ -270,8 +270,8 @@ func (p *Parser) parseGroupedExpression() ast.Expression {
 }
 
 func (p *Parser) parseIfExpression() ast.Expression {
-	trace(fmt.Sprintf("parseIfExpression: curToken=%s", p.curToken.Literal))
-	defer untrace("parseIfExpression")
+	// trace(fmt.Sprintf("parseIfExpression: curToken=%s", p.curToken.Literal))
+	// defer untrace("parseIfExpression")
 
 	expression := &ast.IfExpression{Token: p.curToken}
 	if !p.expectPeek(token.LPAREN) {
@@ -301,8 +301,8 @@ func (p *Parser) parseIfExpression() ast.Expression {
 }
 
 func (p *Parser) parseBlockStatement() *ast.BlockStatement {
-	trace(fmt.Sprintf("parseBlockStatement: curToken=%s", p.curToken.Literal))
-	defer untrace("parseBlockStatement")
+	// trace(fmt.Sprintf("parseBlockStatement: curToken=%s", p.curToken.Literal))
+	// defer untrace("parseBlockStatement")
 
 	block := &ast.BlockStatement{Token: p.curToken}
 	block.Statements = []ast.Statement{}
@@ -320,8 +320,8 @@ func (p *Parser) parseBlockStatement() *ast.BlockStatement {
 }
 
 func (p *Parser) parseFunctionLiteral() ast.Expression {
-	trace(fmt.Sprintf("parseFunctionLiteral: curToken=%s", p.curToken.Literal))
-	defer untrace("parseFunctionLiteral")
+	// trace(fmt.Sprintf("parseFunctionLiteral: curToken=%s", p.curToken.Literal))
+	// defer untrace("parseFunctionLiteral")
 
 	lit := &ast.FunctionLiteral{Token: p.curToken}
 
